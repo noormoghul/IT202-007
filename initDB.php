@@ -13,6 +13,16 @@ $connection_string = "mysql:host=$host;dbname=$database;username=$username;passw
 try{
 	$db = new PDO($connection_string, $username, $password);
 	echo "Should have connected";
+	//create table
+	$query = "create table if not exists 'TestUsers'(
+		'id' int auto_increment not null,
+		'username' varchar(30) not null unique,
+		'pin' int default 0,
+		PRIMARY KEY ('id')
+		) CHARACTER SET utf8 COLLATE utf8_general_ci";
+	$stmt = $db->prepare($query);
+	$r = $stmt->execute();
+	echo "<br>" . ($r>0?"Created table or already exists":"Failed to create table") . "<br>";
 }
 catch(Exception $e){
 	echo $e->getMessage();
