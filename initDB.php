@@ -1,4 +1,4 @@
-<?php
+i<?php
 #turn error reporting on
 ini_set('display_errors',1);
 ini_set('display_startup_errors', 1);
@@ -20,10 +20,7 @@ try{
 		`pin` int default 0,
 		PRIMARY KEY (`id`)
 		) CHARACTER SET utf8 COLLATE utf8_general_ci";
-	$db->setAttribute(PDO::ATTR_ERRMODE,
-	PDO::ERRMODE_WARNING;
 	$stmt = $db->prepare($query);
-	print_r($stmt->errorInfo());
 	$r = $stmt->execute();
 	echo "<br>" . ($r>0?"Created table or already exists":"Failed to create table") . "<br>";
 }
