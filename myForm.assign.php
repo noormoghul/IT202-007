@@ -13,10 +13,10 @@ var returnStatement = "";
 var check = function() {
   if (document.getElementById('password').value ==
     document.getElementById('confirm_password').value) {
-    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').style.color = 'black';
     document.getElementById('message').innerHTML = 'Matching Password';
   } else {
-    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').style.color = 'blue';
     document.getElementById('message').innerHTML = 'Not Matching';
   }
 }
@@ -24,9 +24,7 @@ var check = function() {
 <body><?php getName();?>
 
 <form method="GET" action="#">
-<label>Name :
-  <input name="name" type="text" placeholder="Enter your name"/>
-  <br>
+
   
 <label>Username :
   <input name="username" id="username" type="username"/>
