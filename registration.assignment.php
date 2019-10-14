@@ -26,9 +26,9 @@ function validate(){
 	let pv = document.getElementById("validation.password");
 	let succeeded = true;
 	if(password == conf){
-		
+
 		pv.style.display = "none";
-		form.confirm.className= "noerror";	
+		form.confirm.className= "noerror";
 	}
 	else{
 		pv.style.display = "block";
@@ -50,13 +50,38 @@ function validate(){
 		ev.innerText = "Please enter a valid email address";
 		succeeded = false;
 	}
+
 	/*
 	add validation for a proper selection from dropdown.
 	First element should be "Select One", and it should require that
 	some other value is selected in order to proceed
 	*/
-	return succeeded;	
+	//To get element by name see next line
+	var sel = document.getElementById("dd");
+	//To get by ID uncomment below
+	//sel = document.getElementById("mySelectId");
+	//sample to show debugger use
+	//succeeded = false;
+	//wrongItem.value = "";
+	if(sel.value == ""){
+		alert("Please pick a value");
+		return false;
+	}
+	console.log(sel.options[sel.selectedIndex].value);
+	return true;
 }
+
+function checkIfEmpty() {
+    if(document.getElementById('email').value == "" || document.getElementById('emailconfirm').value == "") {
+        alert('Enter an email address');
+        return false;
+    }
+    if(document.getElementById('password').value == "" || document.getElementById('confirm').value == "") {
+        alert('enter a password');
+        return false;
+    }
+}
+
 </script>
 <style>
 input { border: 1px solid black; }
@@ -66,18 +91,24 @@ input { border: 1px solid black; }
 </head>
 <body>
 <div style="margin-left: 50%; margin-right:50%;">
-<form method="POST" action="#" onsubmit="return validate();">
+<form method="POST" action="#" onsubmit="return checkIfEmpty();">
 <input name="name" type="text" placeholder="Enter your name"/>
 
 <input name="email" type="email" placeholder="name@example.com"/>
+<input name="emailconfirm" type="text" id="emailconfirm" placeholder="Re-Enter email"/>
 <span id="validation.email" style="display:none;"></span>
 
-<input type="password" name="password" placeholder="Enter password"/>
-<input type="password" name="confirm" placeholder="Re-Enter password"/>
+<input type="password" name="password" id="password" placeholder="Enter password"/>
+<input type="password" name="confirm" id="confirm" placeholder="Re-Enter password"/>
 <span style="display:none;" id="validation.password"></span>
 
 <!-- Add dropdown element (something specific to your project) -->
-<input type="submit" value="Try it"/>
+<select name="dd"
+	<option value="">Select One</option>
+	<option value="Deposit">Deposit</option>
+	<option value="Withdrawal">Withdrawal</option>
+</select>
+<input type="submit" value="Try it" onclick="return validate()"/>
 </form>
 </div>
 </body>
